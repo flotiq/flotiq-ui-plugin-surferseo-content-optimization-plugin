@@ -17,6 +17,10 @@ export const getCachedElement = (key) => {
   return appRoots[key];
 };
 
+export const addObjectToCache = (key, data = {}) => {
+  appRoots[key] = data;
+};
+
 export const registerFn = (pluginInfo, callback) => {
   if (window.FlotiqPlugins?.add) {
     window.FlotiqPlugins.add(pluginInfo, callback);

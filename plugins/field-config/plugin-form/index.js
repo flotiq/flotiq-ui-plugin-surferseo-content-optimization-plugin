@@ -1,9 +1,9 @@
-import { getCachedElement } from '../../common/plugin-helpers.js';
 import {
   validFieldsCacheKey,
   validSourceFields,
-} from '../../common/valid-fields';
+} from '../../../common/valid-fields.js';
 import i18n from '../../../../surferseo-plugin/i18n';
+import { getCachedElement } from '../../../common/plugin-element-cache.js';
 
 const insertSelectOptions = (config, options = [], emptyOptionMessage) => {
   config.additionalHelpTextClasses = 'break-normal';
@@ -24,6 +24,7 @@ export const handlePluginFormConfig = ({ name, config, formik }) => {
   if (index == null || !type) return;
   const ctd = formik.values.surferSeoAnalyzer[index].content_type;
   const { sourceFields } = getCachedElement(validFieldsCacheKey);
+  console.log(sourceFields);
 
   const keysToClearOnCtdChange = ['source'];
 

@@ -1,10 +1,10 @@
+import pluginInfo from '../../plugin-manifest.json';
 import {
   addElementToCache,
   getCachedElement,
-} from '../common/plugin-helpers.js';
-import pluginInfo from '../../plugin-manifest.json';
+} from '../../common/plugin-element-cache.js';
 
-export const createSidebar = () => {
+export const createSidebar = (formik, pluginConfig) => {
   const containerCacheKey = `${pluginInfo.id}-surferseo-content-analyzer-container`;
   let contentAnalyzerContainer = getCachedElement(containerCacheKey)?.element;
 
@@ -19,6 +19,8 @@ export const createSidebar = () => {
 
     addElementToCache(contentAnalyzerContainer, containerCacheKey);
   }
+
+  console.log(formik, pluginConfig);
 
   return contentAnalyzerContainer;
 };

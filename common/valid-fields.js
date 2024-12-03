@@ -1,4 +1,4 @@
-import pluginInfo from '../../plugin-manifest.json';
+import pluginInfo from '../plugin-manifest.json';
 
 export const validSourceFields = ['richtext'];
 

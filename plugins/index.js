@@ -4,6 +4,7 @@ import cssString from 'inline:./styles/style.css';
 import { handleManagePlugin } from './manage/index.js';
 import { handlePluginFormConfig } from './field-config/plugin-form/index.js';
 import { createSidebar } from './sidebar/index.js';
+import { parsePluginSettings } from '../common/helpers.js';
 
 const setupSurferSeo = () => {
   (() => {
@@ -39,9 +40,11 @@ const appendStyles = () => {
   }
 };
 
-registerFn(pluginInfo, (handler) => {
+registerFn(pluginInfo, (handler, _, { getPluginSettings, getLanguage }) => {
   setupSurferSeo();
   appendStyles();
+
+  const pluginConfig = parsePluginSettings(getPluginSettings());
 
   handler.on('flotiq.plugins.manage::form-schema', (data) =>
     handleManagePlugin(data),
@@ -57,7 +60,7 @@ registerFn(pluginInfo, (handler) => {
     }
   });
 
-  handler.on('flotiq.form.sidebar-panel::add', () => {
-    return createSidebar();
+  handler.on('flotiq.form.sidebar-panel::add', ({ formik }) => {
+    return createSidebar(formik, pluginConfig);
   });
 });

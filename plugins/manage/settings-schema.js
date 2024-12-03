@@ -1,6 +1,6 @@
 import i18n from '../../i18n';
 import pluginInfo from '../../plugin-manifest.json';
-import { validSourceFields } from '../common/valid-fields';
+import { validSourceFields } from '../../common/valid-fields.js';
 
 export const getSchema = (contentTypes) => ({
   id: pluginInfo.id,
