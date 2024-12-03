@@ -1,7 +1,5 @@
-import { getCachedElement } from '../../../../surferseo-plugin/plugins/common/plugin-helpers';
+import { getCachedElement } from '../../common/plugin-helpers.js';
 import {
-  validCardAdditionalFields,
-  validCardTitleFields,
   validFieldsCacheKey,
   validSourceFields,
 } from '../../common/valid-fields';
@@ -21,23 +19,13 @@ const insertSelectOptions = (config, options = [], emptyOptionMessage) => {
 
 export const handlePluginFormConfig = ({ name, config, formik }) => {
   const { index, type } =
-    name.match(/kanbanBoard\[(?<index>\d+)\].(?<type>\w+)/)?.groups || {};
+    name.match(/surferSeoAnalyzer\[(?<index>\d+)\].(?<type>\w+)/)?.groups || {};
 
   if (index == null || !type) return;
-  const ctd = formik.values.kanbanBoard[index].content_type;
-  const {
-    sourceFields,
-    cardTitleFields,
-    cardImageFields,
-    cardAdditionalFields,
-  } = getCachedElement(validFieldsCacheKey);
+  const ctd = formik.values.surferSeoAnalyzer[index].content_type;
+  const { sourceFields } = getCachedElement(validFieldsCacheKey);
 
-  const keysToClearOnCtdChange = [
-    'source',
-    'title',
-    'image',
-    'additional_fields',
-  ];
+  const keysToClearOnCtdChange = ['source'];
 
   switch (type) {
     case 'content_type':
@@ -46,7 +34,7 @@ export const handlePluginFormConfig = ({ name, config, formik }) => {
         else formik.setFieldValue(name, value);
 
         keysToClearOnCtdChange.forEach((key) => {
-          formik.setFieldValue(`kanbanBoard[${index}].${key}`, '');
+          formik.setFieldValue(`surferSeoAnalyzer[${index}].${key}`, '');
         });
       };
       break;
@@ -56,33 +44,6 @@ export const handlePluginFormConfig = ({ name, config, formik }) => {
         sourceFields?.[ctd],
         i18n.t('NonRequiredFieldsInCTD', {
           types: validSourceFields.join(', '),
-        }),
-      );
-      break;
-    case 'title':
-      insertSelectOptions(
-        config,
-        cardTitleFields?.[ctd],
-        i18n.t('NonRequiredFieldsInCTD', {
-          types: validCardTitleFields.join(', '),
-        }),
-      );
-      break;
-    case 'image':
-      insertSelectOptions(
-        config,
-        cardImageFields?.[ctd],
-        i18n.t('NonRequiredFieldsInCTD', {
-          types: ['Relation to media, media'],
-        }),
-      );
-      break;
-    case 'additional_fields':
-      insertSelectOptions(
-        config,
-        cardAdditionalFields?.[ctd],
-        i18n.t('NonRequiredFieldsInCTD', {
-          types: validCardAdditionalFields.join(', '),
         }),
       );
       break;

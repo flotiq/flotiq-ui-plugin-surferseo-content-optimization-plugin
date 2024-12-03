@@ -1,10 +1,6 @@
-import i18n from '../i18n';
-import pluginInfo from '../plugin-manifest.json';
-import {
-  validCardAdditionalFields,
-  validCardTitleFields,
-  validSourceFields,
-} from '../common/valid-fields';
+import i18n from '../../i18n';
+import pluginInfo from '../../plugin-manifest.json';
+import { validSourceFields } from '../common/valid-fields';
 
 export const getSchema = (contentTypes) => ({
   id: pluginInfo.id,
@@ -20,11 +16,11 @@ export const getSchema = (contentTypes) => ({
       {
         type: 'object',
         properties: {
-          kanbanBoard: {
+          surferSeoAnalyzer: {
             type: 'array',
             items: {
               type: 'object',
-              required: ['content_type', 'source', 'title'],
+              required: ['content_type', 'source'],
               properties: {
                 source: {
                   type: 'string',
@@ -33,17 +29,6 @@ export const getSchema = (contentTypes) => ({
                 content_type: {
                   type: 'string',
                   minLength: 1,
-                },
-                title: {
-                  type: 'string',
-                  minLength: 1,
-                },
-                image: {
-                  type: 'string',
-                  minLength: 1,
-                },
-                additional_fields: {
-                  type: 'array',
                 },
               },
             },
@@ -55,17 +40,11 @@ export const getSchema = (contentTypes) => ({
     additionalProperties: false,
   },
   metaDefinition: {
-    order: ['kanbanBoard'],
+    order: ['surferSeoAnalyzer'],
     propertiesConfig: {
-      kanbanBoard: {
+      surferSeoAnalyzer: {
         items: {
-          order: [
-            'content_type',
-            'source',
-            'title',
-            'image',
-            'additional_fields',
-          ],
+          order: ['content_type', 'source'],
           propertiesConfig: {
             source: {
               label: i18n.t('Source'),
@@ -84,35 +63,6 @@ export const getSchema = (contentTypes) => ({
               optionsWithLabels: contentTypes,
               useOptionsWithLabels: true,
             },
-            title: {
-              label: i18n.t('Title'),
-              unique: false,
-              helpText: i18n.t('TitleHelpText', {
-                types: validCardTitleFields.join(', '),
-              }),
-              inputType: 'select',
-              options: [],
-            },
-            image: {
-              label: i18n.t('Image'),
-              unique: false,
-              helpText: i18n.t('ImageHelpText', {
-                types: ['Relation to media, media'],
-              }),
-              inputType: 'select',
-              options: [],
-            },
-            additional_fields: {
-              label: i18n.t('AdditionalFields'),
-              unique: false,
-              helpText: i18n.t('AdditionalFieldsHelpText', {
-                types: validCardAdditionalFields.join(', '),
-              }),
-              isMultiple: true,
-              useOptionsWithLabels: true,
-              inputType: 'select',
-              options: [],
-            },
           },
         },
         label: i18n.t('Configure'),
@@ -125,23 +75,18 @@ export const getSchema = (contentTypes) => ({
 });
 
 const addToErrors = (errors, index, field, error) => {
-  if (!errors.kanbanBoard) errors.kanbanBoard = [];
-  if (!errors.kanbanBoard[index]) errors.kanbanBoard[index] = {};
-  errors.kanbanBoard[index][field] = error;
+  if (!errors.surferSeoAnalyzer) errors.surferSeoAnalyzer = [];
+  if (!errors.surferSeoAnalyzer[index]) errors.surferSeoAnalyzer[index] = {};
+  errors.surferSeoAnalyzer[index][field] = error;
 };
 
-export const getValidator = (
-  sourceFieldKeys,
-  cardTitleFieldsKeys,
-  cardImageFieldsKeys,
-  cardAdditionalFieldsKeys,
-) => {
+export const getValidator = (sourceFieldKeys) => {
   return (values) => {
     const errors = {};
-    values.kanbanBoard?.forEach((settings, index) => {
+    values.surferSeoAnalyzer?.forEach((settings, index) => {
       const { content_type } = settings;
 
-      const requiredFields = ['content_type', 'source', 'title'];
+      const requiredFields = ['content_type', 'source'];
 
       requiredFields.forEach((requiredField) => {
         if (!settings[requiredField]) {
@@ -151,12 +96,6 @@ export const getValidator = (
 
       const validTypes = [
         { key: 'source', validFieldsKeys: sourceFieldKeys[content_type] },
-        { key: 'title', validFieldsKeys: cardTitleFieldsKeys[content_type] },
-        { key: 'image', validFieldsKeys: cardImageFieldsKeys[content_type] },
-        {
-          key: 'additional_fields',
-          validFieldsKeys: cardAdditionalFieldsKeys[content_type],
-        },
       ];
 
       validTypes.forEach(({ key, validFieldsKeys }) => {
