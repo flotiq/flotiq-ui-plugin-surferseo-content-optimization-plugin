@@ -6,3 +6,11 @@
 .plugin-name-cell-renderer {
   font-family: "Roboto Mono", monospace;
 }
+
+.surfer-guidelines {
+  width: 100%;
+  border: 0;
+  border-radius: 0.5rem;
+  height: 400px;
+  overflow-y: scroll;
+}
