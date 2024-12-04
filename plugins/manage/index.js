@@ -1,7 +1,4 @@
-import {
-  addObjectToCache,
-  getCachedElement,
-} from '../../common/plugin-element-cache.js';
+import { addObjectToCache } from '../../common/plugin-element-cache.js';
 import {
   getValidFields,
   validFieldsCacheKey,

@@ -5,10 +5,11 @@ import { handleManagePlugin } from './manage/index.js';
 import { handlePluginFormConfig } from './field-config/plugin-form/index.js';
 import { createSidebar } from './sidebar/index.js';
 import { parsePluginSettings } from '../common/helpers.js';
+import i18n from 'i18next';
 
 const setupSurferSeo = () => {
   (() => {
-    if (void 0 !== window.surferGuidelines) return;
+    // if (void 0 !== window.surferGuidelines) return;
     window.surferGuidelines = {
       init(...i) {
         window.__sg_in = i;
@@ -41,26 +42,48 @@ const appendStyles = () => {
 };
 
 registerFn(pluginInfo, (handler, _, { getPluginSettings, getLanguage }) => {
+  const getSettings = (contentType) => {
+    const pluginConfig = parsePluginSettings(getPluginSettings());
+    return pluginConfig?.[contentType?.name];
+  };
+
   setupSurferSeo();
   appendStyles();
 
-  const pluginConfig = parsePluginSettings(getPluginSettings());
+  const language = getLanguage();
+  if (language !== i18n.language) {
+    i18n.changeLanguage(language);
+  }
 
   handler.on('flotiq.plugins.manage::form-schema', (data) =>
     handleManagePlugin(data),
   );
 
   handler.on('flotiq.form.field::config', (data) => {
-    if (
-      data.contentType?.id === pluginInfo.id &&
-      data.contentType?.nonCtdSchema &&
-      data.name
-    ) {
-      return handlePluginFormConfig(data);
-    }
+    return handlePluginFormConfig(data);
   });
 
-  handler.on('flotiq.form.sidebar-panel::add', ({ formik }) => {
-    return createSidebar(formik, pluginConfig);
+  handler.on(
+    'flotiq.form.sidebar-panel::add',
+    ({ contentType, contentObject }) => {
+      const ctdConfig = getSettings(contentType);
+      if (!ctdConfig) return;
+
+      return createSidebar(contentObject?.id);
+    },
+  );
+
+  handler.on('flotiq.form::add', ({ formik, contentType }) => {
+    const ctdConfig = getSettings(contentType);
+    if (!ctdConfig) return;
+
+    const source = formik.values[ctdConfig.source];
+    window.surferGuidelines.setHtml(source);
+  });
+
+  handler.on('flotiq.language::changed', ({ language }) => {
+    if (language !== i18n.language) {
+      i18n.changeLanguage(language);
+    }
   });
 });

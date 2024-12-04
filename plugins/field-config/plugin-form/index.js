@@ -24,7 +24,6 @@ export const handlePluginFormConfig = ({ name, config, formik }) => {
   if (index == null || !type) return;
   const ctd = formik.values.surferSeoAnalyzer[index].content_type;
   const { sourceFields } = getCachedElement(validFieldsCacheKey);
-  console.log(sourceFields);
 
   const keysToClearOnCtdChange = ['source'];
 

@@ -4,8 +4,8 @@ import {
   getCachedElement,
 } from '../../common/plugin-element-cache.js';
 
-export const createSidebar = (formik, pluginConfig) => {
-  const containerCacheKey = `${pluginInfo.id}-surferseo-content-analyzer-container`;
+export const createSidebar = (id) => {
+  const containerCacheKey = `${pluginInfo.id}-${id || ''}-surferseo-content-analyzer-container`;
   let contentAnalyzerContainer = getCachedElement(containerCacheKey)?.element;
 
   if (!contentAnalyzerContainer) {
@@ -14,13 +14,11 @@ export const createSidebar = (formik, pluginConfig) => {
 
     window.surferGuidelines.init(
       contentAnalyzerContainer.querySelector('#surfer-guidelines-placeholder'),
-      'sharing-token',
+      null,
     );
 
     addElementToCache(contentAnalyzerContainer, containerCacheKey);
   }
-
-  console.log(formik, pluginConfig);
 
   return contentAnalyzerContainer;
 };
