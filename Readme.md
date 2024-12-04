@@ -12,10 +12,12 @@
 ## Usage
 
 ### Overview
+
 This plugin integrates Surfer SEO into your application, enabling advanced text analysis for selected input fields. It
 provides real-time SEO insights and recommendations, helping you optimize your content directly within your workflow.
 
 ### Configuration
+
 The plugin requires you to select a Content Type Definition (CTD) and a rich text field for which the SEO analysis will
 be performed. The analysis window will be displayed in the sidebar during content creation and editing, providing
 real-time SEO analysis of the content from the selected rich text field. This seamless integration ensures that users
@@ -23,6 +25,24 @@ can optimize their content as they work, without needing to switch between tools
 
 ![](.docs/images/settings-screen.png)
 
+### Usage
+
+> **Note**: You must be logged into your Surfer SEO account and enable third-party cookies in your browser for this
+> integration to function properly.
+
+First, select the keywords you want to target for analyzing your content. These keywords will guide the SEO
+recommendations and help optimize your text effectively. Choosing relevant keywords is essential to ensure the analysis
+aligns with your goals.
+
+![](.docs/images/select-key-words.png)
+
+Next, select the tag of interest from the list of available tags. 
+
+![](.docs/images/tag-list.png)
+
+Now, the content of the selected field will be analyzed based on the tags you have chosen.
+
+![](.docs/images/analize.png)
 
 ## Dev environment
 

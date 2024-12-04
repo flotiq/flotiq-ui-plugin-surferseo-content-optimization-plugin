@@ -9,7 +9,7 @@ import i18n from 'i18next';
 
 const setupSurferSeo = () => {
   (() => {
-    // if (void 0 !== window.surferGuidelines) return;
+    if (void 0 !== window.surferGuidelines) return;
     window.surferGuidelines = {
       init(...i) {
         window.__sg_in = i;
@@ -78,6 +78,7 @@ registerFn(pluginInfo, (handler, _, { getPluginSettings, getLanguage }) => {
     if (!ctdConfig) return;
 
     const source = formik.values[ctdConfig.source];
+
     window.surferGuidelines.setHtml(source);
   });
 

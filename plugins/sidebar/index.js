@@ -7,7 +7,6 @@ import {
 export const createSidebar = (id) => {
   const containerCacheKey = `${pluginInfo.id}-${id || ''}-surferseo-content-analyzer-container`;
   let contentAnalyzerContainer = getCachedElement(containerCacheKey)?.element;
-
   if (!contentAnalyzerContainer) {
     contentAnalyzerContainer = document.createElement('div');
     contentAnalyzerContainer.innerHTML = `<div id="surfer-guidelines-placeholder"> </div>`;
@@ -15,6 +14,7 @@ export const createSidebar = (id) => {
     window.surferGuidelines.init(
       contentAnalyzerContainer.querySelector('#surfer-guidelines-placeholder'),
       null,
+      { permalink: id },
     );
 
     addElementToCache(contentAnalyzerContainer, containerCacheKey);
