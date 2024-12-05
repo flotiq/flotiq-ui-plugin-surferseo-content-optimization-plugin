@@ -2,8 +2,8 @@ import {
   validFieldsCacheKey,
   validSourceFields,
 } from '../../../common/valid-fields.js';
-import i18n from '../../../../surferseo-plugin/i18n';
 import { getCachedElement } from '../../../common/plugin-element-cache.js';
+import i18n from 'i18next';
 
 const insertSelectOptions = (config, options = [], emptyOptionMessage) => {
   config.additionalHelpTextClasses = 'break-normal';

@@ -9,10 +9,12 @@ export const createSidebar = (id) => {
   let contentAnalyzerContainer = getCachedElement(containerCacheKey)?.element;
   if (!contentAnalyzerContainer) {
     contentAnalyzerContainer = document.createElement('div');
-    contentAnalyzerContainer.innerHTML = `<div id="surfer-guidelines-placeholder"> </div>`;
+    contentAnalyzerContainer.innerHTML = `<div id="flotiq-ui-plugin-surfer-seo-sidebar-element"> </div>`;
 
     window.surferGuidelines.init(
-      contentAnalyzerContainer.querySelector('#surfer-guidelines-placeholder'),
+      contentAnalyzerContainer.querySelector(
+        `#flotiq-ui-plugin-surfer-seo-sidebar-element`,
+      ),
       null,
       { permalink: id },
     );
