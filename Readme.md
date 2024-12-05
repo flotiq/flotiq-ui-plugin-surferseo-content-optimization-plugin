@@ -1,13 +1,6 @@
 [[_TOC_]]
 
-# Plain JS Plugin
-
-## Quick start
-
-1. `yarn` - to install dependencies
-2. `yarn start` - to start development mode - rebuild on file modifications
-3. update your `plugin-manifest.json` file to contain the production URL and other plugin information
-4. `yarn build` - to build plugins
+# SurferSeo integration plugin
 
 ## Usage
 
@@ -36,13 +29,23 @@ aligns with your goals.
 
 ![](.docs/images/select-key-words.png)
 
-Next, select the tag of interest from the list of available tags. 
+Next, select the tag of interest from the list of available tags.
 
 ![](.docs/images/tag-list.png)
 
 Now, the content of the selected field will be analyzed based on the tags you have chosen.
 
 ![](.docs/images/analize.png)
+
+You can read more about SurferSeo
+plugin [here](https://surferseo.notion.site/Surfer-Guidelines-in-your-CMS-ba2ea6b1a3234850bc1b49caa1a7acda)
+
+## Quick start
+
+1. `yarn` - to install dependencies
+2. `yarn start` - to start development mode - rebuild on file modifications
+3. update your `plugin-manifest.json` file to contain the production URL and other plugin information
+4. `yarn build` - to build plugins
 
 ## Dev environment
 
