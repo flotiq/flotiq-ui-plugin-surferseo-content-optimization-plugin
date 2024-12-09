@@ -50,9 +50,12 @@ export const createSidebar = (id) => {
       }
     };
 
-    const { $iframe, setPermalink } = window.surferGuidelines.initWithOptions({
-      onNavigation: onNavigationCallback,
-    });
+    const { $iframe, setPermalink, setHtml } =
+      window.surferGuidelines.initWithOptions({
+        onNavigation: onNavigationCallback,
+      });
+
+    window.surferGuidelines.setHtml = setHtml;
 
     setPermalink(id);
 
