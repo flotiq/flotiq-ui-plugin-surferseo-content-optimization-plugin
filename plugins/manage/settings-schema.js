@@ -25,7 +25,7 @@ export const getSchema = (contentTypes) => ({
             type: 'array',
             items: {
               type: 'object',
-              required: ['content_type', 'source', 'title', 'lead', 'faq'],
+              required: ['content_type', 'source'],
               properties: {
                 content_type: {
                   type: 'string',
