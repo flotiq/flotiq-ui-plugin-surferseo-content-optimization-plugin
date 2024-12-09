@@ -24,6 +24,8 @@ i18n.init({
         NonRequiredFieldsInCTD:
           'Make sure the selected content type contains fields that can be used in the plugin. ' +
           'Allowed types: {{types}}',
+        ThirdPartyCookies:
+          'You might need to enable third-party cookies in your browser for this integration to function properly',
       },
     },
     pl: {
@@ -47,6 +49,9 @@ i18n.init({
         NonRequiredFieldsInCTD:
           'Upewnij się, że wybrany typ definicji zawiera pola, które mogą być wykorzystane we wtyczce. ' +
           'Dozwolone typy: {{types}}',
+        ThirdPartyCookies:
+          'Aby ta integracja działała poprawnie, konieczne może być włączenie w przeglądarce obsługi ' +
+          'plików cookie innych firm',
       },
     },
   },
