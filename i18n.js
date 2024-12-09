@@ -6,9 +6,9 @@ i18n.init({
   resources: {
     en: {
       translation: {
-        Source: 'Source field name (Required)',
+        Source: 'Source field name',
         SourceHelpText:
-          'Select the field from which the content will be given for analysis, as the main content (Required)',
+          'Select the field from which the content will be given for analysis, as the main content',
         Title: 'Title field name',
         TitleHelpText:
           'Select the field whose content will be provided for analysis as an h1 tag',
@@ -28,9 +28,9 @@ i18n.init({
     },
     pl: {
       translation: {
-        Source: 'Pole źródła (Wymagane)',
+        Source: 'Pole źródła',
         SourceHelpText:
-          'Wybierz pole z którego zawartość będzie podana do analizy, jako główny content (Wymagane)',
+          'Wybierz pole z którego zawartość będzie podana do analizy, jako główny content',
         Title: 'Pole tytułu',
         TitleHelpText:
           'Wybierz pole którego zawartość będzie podana do analizy jako tag h1',
