@@ -11,16 +11,17 @@ export const buildTemplate = (title, lead, source, faq) => {
 
   body.innerHTML += source;
 
-  if (faq) {
+  if (faq && faq.length > 0) {
     body.innerHTML += `<h2>Frequently Asked Questions</h2>`;
 
-    body.innerHTML += faq.map(({ question, answer }) => {
-      return `
-         <div>
+    body.innerHTML += faq
+      .filter(({ question, answer }) => question && answer)
+      .map(({ question, answer }) => {
+        return `
             <h3>${question}</h3>
-            <div>${answer}</div>
-        </div>`;
-    });
+            <p>${answer}</p>
+        `;
+      });
   }
 
   return body.outerHTML;
