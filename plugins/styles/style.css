@@ -1,7 +1,38 @@
-.surfer-guidelines {
+.flotiq-ui-plugin-surfer-seo-content-analyzer-label {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 4px;
+  background-color: #f4f7fe;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+@media (max-width: 1279px) {
+  .flotiq-ui-plugin-surfer-seo-content-analyzer-label {
+    border: 1px solid #dae3f2;
+  }
+}
+
+.flotiq-ui-plugin-surfer-seo-content-analyzer-label--hidden {
+  display: none;
+}
+
+.flotiq-ui-plugin-surfer-seo-content-analyzer-warning {
+  content: url('../images/information.svg');
+  width: 20px;
+  height: 20px;
+  margin-bottom: auto;
+}
+
+.flotiq-ui-plugin-surfer-seo-sidebar-element-iframe {
   width: 100%;
-  border: 0;
+  height: 650px;
+}
+
+.flotiq-ui-plugin-surfer-seo-content-analyzer-container {
   border-radius: 0.5rem;
-  height: 500px;
-  overflow-y: scroll;
+  background-color: white;
+  width: 100%;
+  overflow: hidden;
+  min-height: 650px;
 }

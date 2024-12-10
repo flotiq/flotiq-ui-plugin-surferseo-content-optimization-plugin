@@ -6,6 +6,7 @@ import { handlePluginFormConfig } from './field-config/plugin-form/index.js';
 import { createSidebar } from './sidebar/index.js';
 import { parsePluginSettings } from '../common/helpers.js';
 import i18n from 'i18next';
+import { buildTemplate } from './template/template.js';
 
 const setupSurferSeo = () => {
   (() => {
@@ -41,50 +42,58 @@ const appendStyles = () => {
   }
 };
 
-registerFn(pluginInfo, (handler, _, { getPluginSettings, getLanguage }) => {
-  const getSettings = (contentType) => {
-    const pluginConfig = parsePluginSettings(getPluginSettings());
-    return pluginConfig?.[contentType?.name];
-  };
+registerFn(
+  pluginInfo,
+  (handler, _, { getPluginSettings, getLanguage, getSpaceId }) => {
+    const getSettings = (contentType) => {
+      const pluginConfig = parsePluginSettings(getPluginSettings());
+      return pluginConfig?.[contentType?.name];
+    };
 
-  setupSurferSeo();
-  appendStyles();
+    setupSurferSeo();
+    appendStyles();
 
-  const language = getLanguage();
-  if (language !== i18n.language) {
-    i18n.changeLanguage(language);
-  }
-
-  handler.on('flotiq.plugins.manage::form-schema', (data) =>
-    handleManagePlugin(data),
-  );
-
-  handler.on('flotiq.form.field::config', (data) => {
-    return handlePluginFormConfig(data);
-  });
-
-  handler.on(
-    'flotiq.form.sidebar-panel::add',
-    ({ contentType, contentObject }) => {
-      const ctdConfig = getSettings(contentType);
-      if (!ctdConfig) return;
-
-      return createSidebar(contentObject?.id);
-    },
-  );
-
-  handler.on('flotiq.form::add', ({ formik, contentType }) => {
-    const ctdConfig = getSettings(contentType);
-    if (!ctdConfig) return;
-
-    const source = formik.values[ctdConfig.source];
-
-    window.surferGuidelines.setHtml(source);
-  });
-
-  handler.on('flotiq.language::changed', ({ language }) => {
+    const language = getLanguage();
     if (language !== i18n.language) {
       i18n.changeLanguage(language);
     }
-  });
-});
+
+    handler.on('flotiq.plugins.manage::form-schema', (data) =>
+      handleManagePlugin(data),
+    );
+
+    handler.on('flotiq.form.field::config', (data) =>
+      handlePluginFormConfig(data),
+    );
+
+    handler.on(
+      'flotiq.form.sidebar-panel::add',
+      ({ contentType, contentObject }) => {
+        const ctdConfig = getSettings(contentType);
+        if (!ctdConfig) return;
+
+        return createSidebar(getSpaceId, contentObject?.id);
+      },
+    );
+
+    handler.on('flotiq.form::add', ({ formik, contentType }) => {
+      const ctdConfig = getSettings(contentType);
+      if (!ctdConfig) return;
+
+      const source = buildTemplate(
+        formik.values[ctdConfig.title],
+        formik.values[ctdConfig.lead],
+        formik.values[ctdConfig.source],
+        formik.values[ctdConfig.faq],
+      );
+
+      window.surferGuidelines.setHtml(source);
+    });
+
+    handler.on('flotiq.language::changed', ({ language }) => {
+      if (language !== i18n.language) {
+        i18n.changeLanguage(language);
+      }
+    });
+  },
+);
