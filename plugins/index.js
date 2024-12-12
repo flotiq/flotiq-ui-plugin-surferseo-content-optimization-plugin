@@ -2,7 +2,7 @@ import { registerFn } from '../common/plugin-element-cache';
 import pluginInfo from '../plugin-manifest.json';
 import cssString from 'inline:./styles/style.css';
 import { handleManagePlugin } from './manage/index.js';
-import { handlePluginFormConfig } from './field-config/plugin-form/index.js';
+import { handlePluginFormConfig } from './field-config/index.js';
 import { createSidebar } from './sidebar/index.js';
 import { parsePluginSettings } from '../common/helpers.js';
 import i18n from 'i18next';

@@ -1,11 +1,5 @@
 import i18n from '../../i18n';
 import pluginInfo from '../../plugin-manifest.json';
-import {
-  validFaqFields,
-  validLeadFields,
-  validSourceFields,
-  validTitleFields,
-} from '../../common/valid-fields.js';
 
 export const getSchema = (contentTypes) => ({
   id: pluginInfo.id,
@@ -66,44 +60,36 @@ export const getSchema = (contentTypes) => ({
             content_type: {
               label: i18n.t('ContentType'),
               unique: false,
-              helpText: i18n.t('ContentTypeHelpText'),
+              helpText: '',
               inputType: 'select',
               optionsWithLabels: contentTypes,
               useOptionsWithLabels: true,
             },
             source: {
-              label: i18n.t('Source'),
+              label: i18n.t('Content'),
               unique: false,
-              helpText: i18n.t('SourceHelpText', {
-                types: validSourceFields.join(', '),
-              }),
+              helpText: i18n.t('ContentHelpText'),
               inputType: 'select',
               options: [],
             },
             title: {
               label: i18n.t('Title'),
               unique: false,
-              helpText: i18n.t('TitleHelpText', {
-                types: validTitleFields.join(', '),
-              }),
+              helpText: i18n.t('TitleHelpText'),
               inputType: 'select',
               options: [],
             },
             lead: {
               label: i18n.t('Lead'),
               unique: false,
-              helpText: i18n.t('LeadHelpText', {
-                types: validLeadFields.join(', '),
-              }),
+              helpText: i18n.t('LeadHelpText'),
               inputType: 'select',
               options: [],
             },
             faq: {
               label: i18n.t('Faq'),
               unique: false,
-              helpText: i18n.t('FaqHelpText', {
-                types: validFaqFields.join(', '),
-              }),
+              helpText: i18n.t('FaqHelpText'),
               inputType: 'select',
               options: [],
             },
