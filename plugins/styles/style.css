@@ -36,3 +36,13 @@
   overflow: hidden;
   min-height: 650px;
 }
+
+.flotiq-ui-plugin-manage-additional-fields {
+  border-top: 1px solid #dae3f2;
+  padding: 12px 0;
+  margin-top: 24px;
+}
+
+.flotiq-ui-plugin-manage-empty-options {
+  padding: 12px;
+}

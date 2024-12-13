@@ -6,19 +6,22 @@ i18n.init({
   resources: {
     en: {
       translation: {
-        Source: 'Source field name',
-        SourceHelpText:
-          'Select the field from which the content will be given for analysis, as the main content',
+        AdditionalFields: 'Additional fields',
+        AdditionalFieldsHelpText:
+          'If your content is sourced from multiple fields, configure additional fields for analysis.',
+        AllowedFaq:
+          'list, that must contains two fields: question and answer, which are text or textarea',
+        Content: 'Content field name',
+        ContentHelpText:
+          'Select the field that contains the main body of your content.',
         Title: 'Title field name',
-        TitleHelpText:
-          'Select the field whose content will be provided for analysis as an h1 tag',
+        TitleHelpText: 'Select the field that contains the main heading (H1).',
         Lead: 'Lead field name',
         LeadHelpText:
-          'Select the field whose contents will be given to the analysis as p tag',
+          'Select the field that contains the lead paragraph or introductory text.',
         Faq: 'FAQ',
-        FaqHelpText: 'Select the field from FAQ will be embeded to analysis',
+        FaqHelpText: 'Select the field that contains the FAQ section.',
         ContentType: 'Content Type',
-        ContentTypeHelpText: '',
         FieldRequired: 'Field is required',
         WrongFieldType: 'This field type is not supported',
         NonRequiredFieldsInCTD:
@@ -30,20 +33,21 @@ i18n.init({
     },
     pl: {
       translation: {
-        Source: 'Pole źródła',
-        SourceHelpText:
-          'Wybierz pole z którego zawartość będzie podana do analizy, jako główny content',
+        AdditionalFields: 'Dodatkowe pola',
+        AdditionalFieldsHelpText:
+          'Jeśli treść pochodzi z wielu pól, skonfiguruj dodatkowe pola do analizy',
+        AllowedFaq:
+          'lista, musi ona zawierać dwa pola: question i answer, które są tekstem lub długim polem tekstowym',
+        Content: 'Pole źródła',
+        ContentHelpText: 'Wybierz pole zawierające główną treść treści.',
         Title: 'Pole tytułu',
-        TitleHelpText:
-          'Wybierz pole którego zawartość będzie podana do analizy jako tag h1',
+        TitleHelpText: 'Wybierz pole zawierające nagłówek główny (H1).',
         Lead: 'Pole wprowadzenia',
         LeadHelpText:
-          'Wybierz pole którego zawartość będzie podana analizy jako tag p',
+          'Wybierz pole zawierające akapit wiodący lub tekst wprowadzający',
         Faq: 'FAQ',
-        FaqHelpText:
-          'Wybierz pole którego z którego zostaną pobrane FAQ, oraz przekazane do analizy',
+        FaqHelpText: 'Wybierz pole zawierające sekcję FAQ.',
         ContentType: 'Typ zawartości',
-        ContentTypeHelpText: '',
         FieldRequired: 'Pole jest wymagane',
         WrongFieldType: 'Ten typ pola nie jest wspierany',
         NonRequiredFieldsInCTD:

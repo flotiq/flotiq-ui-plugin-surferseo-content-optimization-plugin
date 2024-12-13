@@ -48,8 +48,11 @@ export const createSidebar = (getSpaceId, objectId) => {
 
     const spaceId = getSpaceId();
 
+    let urlHash = `#surferSpace=${spaceId}`;
+    if (!objectId) urlHash += `&surferTime=${Date.now()}`;
+
     const url = new URL(window.location.href);
-    url.hash = `#surferSpace=${spaceId}`;
+    url.hash = urlHash;
 
     setPermalink(url.toString());
 
