@@ -3,7 +3,7 @@
   "name": "SurferSEO Content Optimization Plugin",
   "description": " Use leading content optimization platform directly in Flotiq and never miss a chance to increase your visibility in search engines!",
   "version": "1.1.2",
-  "repository": "https://github.com/flotiq/flotiq-ui-plugin-surferseo-content-analyzer",
+  "repository": "https://github.com/flotiq/flotiq-ui-plugin-surferseo-content-optimization-plugin",
   "url": "https://localhost:3053/index.js",
   "permissions": []
 }
