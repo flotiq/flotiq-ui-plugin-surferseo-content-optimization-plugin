@@ -63,7 +63,7 @@ Next, select the tag of interest from the list of available tags.
 
 Now, the content of the selected field will be analyzed based on the tags you have chosen.
 
-![](.docs/images/analize.png)
+![](.docs/images/analyze.png)
 
 You can read more about SurferSeo
 plugin [here](https://surferseo.notion.site/Surfer-Guidelines-in-your-CMS-ba2ea6b1a3234850bc1b49caa1a7acda)
