@@ -27,7 +27,7 @@ export const handleManagePlugin = ({ plugin, contentTypes, modalInstance }) => {
 
   configCache = {
     options: {
-      disbaledBuildInValidation: true,
+      disabledBuildInValidation: true,
       onValidate: getValidator(
         titleFieldsKeys,
         leadFieldsKeys,
