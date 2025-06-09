@@ -7,6 +7,7 @@ import { createSidebar } from './sidebar/index.js';
 import { parsePluginSettings } from '../common/helpers.js';
 import i18n from 'i18next';
 import { buildTemplate } from './template/template.js';
+import { handleFormFieldListenersAdd } from './field-listeners/index.js';
 
 const setupSurferSeo = () => {
   (() => {
@@ -89,6 +90,10 @@ registerFn(
 
       window.surferGuidelines.setHtml(source);
     });
+
+    handler.on('flotiq.form.field.listeners::add', (data) =>
+      handleFormFieldListenersAdd(data),
+    );
 
     handler.on('flotiq.language::changed', ({ language }) => {
       if (language !== i18n.language) {

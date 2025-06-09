@@ -70,19 +70,7 @@ export const handlePluginFormConfig = ({
   const { titleFields, leadFields, sourceFields, faqFields } =
     getCachedElement(validFieldsCacheKey) || {};
 
-  const keysToClearOnCtdChange = ['title', 'lead', 'source', 'faq'];
-
   switch (type) {
-    case 'content_type':
-      config.onChange = (_, value) => {
-        if (value == null) formik.setFieldValue(name, '');
-        else formik.setFieldValue(name, value);
-
-        keysToClearOnCtdChange.forEach((key) => {
-          formik.setFieldValue(`surferSeoAnalyzer[${index}].${key}`, '');
-        });
-      };
-      break;
     case 'title':
       insertSelectOptions(
         config,
