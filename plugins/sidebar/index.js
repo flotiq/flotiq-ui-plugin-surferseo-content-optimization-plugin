@@ -4,8 +4,9 @@ import {
   getCachedElement,
 } from '../../common/plugin-element-cache.js';
 import i18n from '../../i18n';
+import { buildTemplate } from '../template/template.js';
 
-export const createSidebar = (getSpaceId, objectId) => {
+export const createSidebar = (getSpaceId, objectId, form, ctdConfig) => {
   const containerCacheKey = `${pluginInfo.id}-${objectId || 'new'}-surferseo-content-analyzer-container`;
   let contentAnalyzerContainer = getCachedElement(containerCacheKey)?.element;
 
@@ -30,6 +31,15 @@ export const createSidebar = (getSpaceId, objectId) => {
           .classList.add(
             'flotiq-ui-plugin-surfer-seo-content-analyzer-label--hidden',
           );
+        if (RpcView === 'guidelines') {
+          const source = buildTemplate(
+            form.getValue(ctdConfig.title),
+            form.getValue(ctdConfig.lead),
+            form.getValue(ctdConfig.source),
+            form.getValue(ctdConfig.faq),
+          );
+          window.surferGuidelines.setHtml(source);
+        }
       } else {
         contentAnalyzerContainer
           .querySelector('.flotiq-ui-plugin-surfer-seo-content-analyzer-label')

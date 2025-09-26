@@ -104,12 +104,6 @@ export const getSchema = (contentTypes) => ({
   },
 });
 
-const addToErrors = (errors, index, field, error) => {
-  if (!errors.surferSeoAnalyzer) errors.surferSeoAnalyzer = [];
-  if (!errors.surferSeoAnalyzer[index]) errors.surferSeoAnalyzer[index] = {};
-  errors.surferSeoAnalyzer[index][field] = error;
-};
-
 export const getValidator = (
   titleFieldsKeys,
   leadFieldsKeys,
@@ -125,7 +119,8 @@ export const getValidator = (
 
       requiredFields.forEach((requiredField) => {
         if (!settings[requiredField]) {
-          addToErrors(errors, index, requiredField, i18n.t('FieldRequired'));
+          errors[`surferSeoAnalyzer[${index}].${requiredField}`] =
+            i18n.t('FieldRequired');
         }
       });
 
@@ -145,13 +140,15 @@ export const getValidator = (
             value?.length > 0 &&
             !value.every((element) => validFieldsKeys.includes(element || []))
           ) {
-            addToErrors(errors, index, key, i18n.t('WrongFieldType'));
+            errors[`surferSeoAnalyzer[${index}].${key}`] =
+              i18n.t('WrongFieldType');
           }
           return;
         }
 
         if (value && !(validFieldsKeys || []).includes(value)) {
-          addToErrors(errors, index, key, i18n.t('WrongFieldType'));
+          errors[`surferSeoAnalyzer[${index}].${key}`] =
+            i18n.t('WrongFieldType');
         }
       });
     });
