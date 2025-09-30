@@ -6,7 +6,6 @@ import { handlePluginFormConfig } from './field-config/index.js';
 import { createSidebar } from './sidebar/index.js';
 import { parsePluginSettings } from '../common/helpers.js';
 import i18n from 'i18next';
-import { buildTemplate } from './template/template.js';
 import { handleFormFieldListenersAdd } from './field-listeners/index.js';
 
 const setupSurferSeo = () => {
@@ -69,30 +68,16 @@ registerFn(
 
     handler.on(
       'flotiq.form.sidebar-panel::add',
-      ({ contentType, contentObject }) => {
+      ({ contentType, contentObject, form }) => {
         const ctdConfig = getSettings(contentType);
-        if (!ctdConfig) return;
+        if (!ctdConfig || !form) return;
 
-        return createSidebar(getSpaceId, contentObject?.id);
+        return createSidebar(getSpaceId, contentObject?.id, form, ctdConfig);
       },
     );
 
-    handler.on('flotiq.form::add', ({ formik, contentType }) => {
-      const ctdConfig = getSettings(contentType);
-      if (!ctdConfig) return;
-
-      const source = buildTemplate(
-        formik.values[ctdConfig.title],
-        formik.values[ctdConfig.lead],
-        formik.values[ctdConfig.source],
-        formik.values[ctdConfig.faq],
-      );
-
-      window.surferGuidelines.setHtml(source);
-    });
-
     handler.on('flotiq.form.field.listeners::add', (data) =>
-      handleFormFieldListenersAdd(data),
+      handleFormFieldListenersAdd(data, getSettings(data.contentType)),
     );
 
     handler.on('flotiq.language::changed', ({ language }) => {

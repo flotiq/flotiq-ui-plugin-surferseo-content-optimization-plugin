@@ -51,12 +51,7 @@ const getAdditionalFieldsElement = (name) => {
   return element;
 };
 
-export const handlePluginFormConfig = ({
-  contentType,
-  name,
-  config,
-  formik,
-}) => {
+export const handlePluginFormConfig = ({ contentType, name, config, form }) => {
   if (contentType?.id !== pluginInfo.id && !contentType?.nonCtdSchema) {
     return;
   }
@@ -65,7 +60,7 @@ export const handlePluginFormConfig = ({
     name.match(/surferSeoAnalyzer\[(?<index>\d+)\].(?<type>\w+)/)?.groups || {};
 
   if (index == null || !type) return;
-  const ctd = formik.values.surferSeoAnalyzer[index].content_type;
+  const ctd = form.getValue(`surferSeoAnalyzer[${index}].content_type`);
 
   const { titleFields, leadFields, sourceFields, faqFields } =
     getCachedElement(validFieldsCacheKey) || {};
